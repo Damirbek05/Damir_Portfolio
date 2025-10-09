@@ -83,12 +83,12 @@ export default function Portfolio() {
             <div className="absolute -top-3 left-4 bg-[#282c33] px-2">
               <span className="text-2xl text-[#abb2bf]">"</span>
             </div>
-            <p className="text-center text-lg mb-4">With great power comes great electricity bill</p>
+            <p className="text-center text-lg mb-4">Frontend is not just about pixels — it’s about experience.</p>
             <div className="absolute -bottom-3 right-4 bg-[#282c33] px-2">
               <span className="text-2xl text-[#abb2bf]">"</span>
             </div>
             <div className="text-right">
-              <span className="text-[#abb2bf]">- Dr. Who</span>
+              <span className="text-[#abb2bf]">- Damir Ospanbek</span>
             </div>
           </div>
         </div>
@@ -198,7 +198,7 @@ export default function Portfolio() {
             <div>
               <h3 className="text-[#ffffff] font-semibold mb-4 border border-[#abb2bf] px-3 py-2">Backend</h3>
               <div className="border border-[#abb2bf] border-t-0 p-4 space-y-2">
-                <div className="text-[#abb2bf]">FastAPI</div>
+                <div className="text-[#abb2bf]">NestJs</div>
                 <div className="text-[#abb2bf]">RESTful APIs</div>
                 <div className="text-[#abb2bf]">Swagger UI</div>
               </div>
@@ -314,7 +314,7 @@ export default function Portfolio() {
           </div>
         </div>
         <div className="text-center mt-8 pt-8 border-t border-[#21252b]">
-          <p className="text-[#abb2bf] text-sm">© Copyright 2022. Made by Damir</p>
+          <p className="text-[#abb2bf] text-sm">© Copyright 2025. Made by Damir</p>
         </div>
       </footer>
     </div>
