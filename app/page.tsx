@@ -57,7 +57,7 @@ export default function Portfolio() {
           </div>
           <div className="relative">
             <img
-              src="/hooded-figure-developer-illustration-dark-theme.jpg"
+              src="/ava24.jpg"
               alt="Developer illustration"
               className="w-full max-w-md mx-auto"
             />
@@ -69,7 +69,7 @@ export default function Portfolio() {
             <div className="absolute bottom-8 left-8 bg-[#282c33] border border-[#abb2bf] px-4 py-2 flex items-center gap-2">
               <div className="w-3 h-3 bg-[#c778dd]"></div>
               <span className="text-sm">
-                Currently working on <span className="text-[#ffffff]">Portfolio</span>
+                Currently working on <span className="text-[#ffffff]">Maxinum</span>
               </span>
             </div>
           </div>
@@ -282,7 +282,7 @@ export default function Portfolio() {
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <Mail className="w-4 h-4" />
-                    <span className="text-[#abb2bf]">~Damir#1234</span>
+                    <span className="text-[#abb2bf]">@domrix0</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Mail className="w-4 h-4" />
