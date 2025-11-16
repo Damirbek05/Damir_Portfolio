@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Mail } from "lucide-react"
+import { Mail } from 'lucide-react'
 import Link from "next/link"
 import { EnhancedButton } from "@/components/ui/enhanced-button"
 import { LanguageDropdown } from "@/components/ui/language-dropdown"
@@ -248,15 +248,39 @@ export default function Portfolio() {
               </Button>
             </div>
             <div className="relative">
-              <img
-                src="/developer-working-at-computer-dark-theme-illustrat.jpg"
-                alt="Developer working"
-                className="w-full max-w-md mx-auto"
-              />
-              <div className="absolute top-4 right-4 flex gap-1">
-                {Array.from({ length: 25 }).map((_, i) => (
-                  <div key={i} className="w-1 h-1 bg-[#c778dd] opacity-50"></div>
-                ))}
+              <div className="relative group">
+                {/* Decorative border frame */}
+                <div className="absolute -inset-4 border-2 border-[#c778dd] opacity-50"></div>
+                <div className="absolute -inset-2 border border-[#abb2bf] opacity-30"></div>
+                
+                {/* Image container with gradient overlay */}
+                <div className="relative overflow-hidden border-2 border-[#21252b]">
+                  <img
+                    src="/blue-code.jpg"
+                    alt="Developer code workspace"
+                    className="w-full max-w-md mx-auto object-cover aspect-[4/3] group-hover:scale-105 transition-transform duration-500"
+                  />
+                  {/* Gradient overlay for depth */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#c778dd]/20 via-transparent to-transparent pointer-events-none"></div>
+                </div>
+
+                {/* Decorative corner accents */}
+                <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-[#c778dd]"></div>
+                <div className="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-[#c778dd]"></div>
+                <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-[#c778dd]"></div>
+                <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-[#c778dd]"></div>
+
+                {/* Dot pattern decoration */}
+                <div className="absolute -top-6 -right-6 grid grid-cols-5 gap-1 opacity-40">
+                  {Array.from({ length: 25 }).map((_, i) => (
+                    <div key={i} className="w-1 h-1 bg-[#c778dd]"></div>
+                  ))}
+                </div>
+                <div className="absolute -bottom-6 -left-6 grid grid-cols-5 gap-1 opacity-40">
+                  {Array.from({ length: 25 }).map((_, i) => (
+                    <div key={i} className="w-1 h-1 bg-[#c778dd]"></div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
