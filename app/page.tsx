@@ -6,6 +6,7 @@ import { EnhancedButton } from "@/components/ui/enhanced-button"
 import { LanguageDropdown } from "@/components/ui/language-dropdown"
 import { SocialIcons } from "@/components/ui/social-icons"
 import { DotPattern, GeometricShapes } from "@/components/ui/decorative-elements"
+import { getAssetPath } from "@/lib/utils"
 
 export default function Portfolio() {
   return (
@@ -57,7 +58,7 @@ export default function Portfolio() {
           </div>
           <div className="relative">
             <img
-              src="/ava24.jpg"
+              src={getAssetPath("/ava24.jpg")}
               alt="Developer illustration"
               className="w-full max-w-md mx-auto"
             />
@@ -111,7 +112,7 @@ export default function Portfolio() {
             <Card className="bg-[#21252b] border-[#abb2bf] overflow-hidden">
               <div className="h-48 bg-gradient-to-br from-orange-500 to-red-600 relative">
                 <img
-                  src="/chertnodes-project-interface-dark-theme.jpg"
+                  src={getAssetPath("/chertnodes-project-interface-dark-theme.jpg")}
                   alt="ChertNodes project"
                   className="w-full h-full object-cover"
                 />
@@ -135,7 +136,7 @@ export default function Portfolio() {
             <Card className="bg-[#21252b] border-[#abb2bf] overflow-hidden">
               <div className="h-48 bg-[#1a1a1a] relative flex items-center justify-center">
                 <img
-                  src="/protectx-security-app-interface-green-shield.jpg"
+                  src={getAssetPath("/protectx-security-app-interface-green-shield.jpg")}
                   alt="ProtectX project"
                   className="w-full h-full object-cover"
                 />
@@ -158,7 +159,7 @@ export default function Portfolio() {
             <Card className="bg-[#21252b] border-[#abb2bf] overflow-hidden">
               <div className="h-48 bg-[#6441a5] relative flex items-center justify-center">
                 <img
-                  src="/kahoot-answers-viewer-purple-interface.jpg"
+                  src={getAssetPath("/kahoot-answers-viewer-purple-interface.jpg")}
                   alt="Kahoot Answers Viewer project"
                   className="w-full h-full object-cover"
                 />
@@ -256,7 +257,7 @@ export default function Portfolio() {
                 {/* Image container with gradient overlay */}
                 <div className="relative overflow-hidden border-2 border-[#21252b]">
                   <img
-                    src="/blue-code.jpg"
+                    src={getAssetPath("/blue-code.jpg")}
                     alt="Developer code workspace"
                     className="w-full max-w-md mx-auto object-cover aspect-[4/3] group-hover:scale-105 transition-transform duration-500"
                   />

@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { LanguageDropdown } from "@/components/ui/language-dropdown"
+import { getAssetPath } from "@/lib/utils"
 
 export default function AboutMe() {
   return (
@@ -63,7 +64,7 @@ export default function AboutMe() {
                   <div className="relative p-1 bg-gradient-to-tl from-[#c778dd]/20 to-transparent rounded-lg">
                     <div className="relative overflow-hidden rounded-lg">
                       <img
-                        src="/blue-code.jpg"
+                        src={getAssetPath("/blue-code.jpg")}
                         alt="Developer working"
                         className="w-full max-w-md mx-auto transform transition-transform duration-500 group-hover:scale-105"
                       />

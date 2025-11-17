@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card"
 import { Github, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import { LanguageDropdown } from "@/components/ui/language-dropdown"
+import { getAssetPath } from "@/lib/utils"
 
 export default function ProjectsPage() {
   return (
@@ -50,7 +51,7 @@ export default function ProjectsPage() {
               <Card className="bg-[#21252b] border-[#abb2bf] overflow-hidden">
                 <div className="h-48 bg-gradient-to-br from-orange-500 to-red-600 relative">
                   <img
-                    src="/chertnodes-project-interface-dark-theme.jpg"
+                    src={getAssetPath("/chertnodes-project-interface-dark-theme.jpg")}
                     alt="ChertNodes project"
                     className="w-full h-full object-cover"
                   />
@@ -85,7 +86,7 @@ export default function ProjectsPage() {
               <Card className="bg-[#21252b] border-[#abb2bf] overflow-hidden">
                 <div className="h-48 bg-[#6441a5] relative flex items-center justify-center">
                   <img
-                    src="/kahoot-answers-viewer-purple-interface.jpg"
+                    src={getAssetPath("/kahoot-answers-viewer-purple-interface.jpg")}
                     alt="Kahoot Answers Viewer project"
                     className="w-full h-full object-cover"
                   />
@@ -113,7 +114,7 @@ export default function ProjectsPage() {
               <Card className="bg-[#21252b] border-[#abb2bf] overflow-hidden">
                 <div className="h-48 bg-[#1a1a1a] relative flex items-center justify-center">
                   <img
-                    src="/protectx-security-app-interface-green-shield.jpg"
+                    src={getAssetPath("/protectx-security-app-interface-green-shield.jpg")}
                     alt="ProtectX project"
                     className="w-full h-full object-cover"
                   />
