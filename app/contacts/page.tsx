@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { SocialIcons } from "@/components/ui/social-icons"
 import { DotPattern } from "@/components/ui/decorative-elements"
-import { LanguageDropdown } from "@/components/ui/language-dropdown"
 
 export default function Contacts() {
   return (
@@ -30,7 +29,6 @@ export default function Contacts() {
             <Link href="/contacts" className="text-[#ffffff] hover:text-[#c778dd] transition-colors">
               <span className="text-[#c778dd]">#</span>contacts
             </Link>
-            <LanguageDropdown />
           </div>
         </nav>
       </header>

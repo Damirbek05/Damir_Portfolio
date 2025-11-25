@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { LanguageDropdown } from "@/components/ui/language-dropdown"
 import { getAssetPath } from "@/lib/utils"
 
 export default function AboutMe() {
@@ -25,7 +24,6 @@ export default function AboutMe() {
             <Link href="/contacts" className="hover:text-[#c778dd] transition-colors">
               <span className="text-[#c778dd]">#</span>contacts
             </Link>
-            <LanguageDropdown />
           </div>
         </nav>
       </header>
@@ -160,10 +158,7 @@ export default function AboutMe() {
                 <span className="text-[#abb2bf]">I like pizza and pasta</span>
               </div>
               <div className="border border-[#abb2bf] px-4 py-2 inline-block">
-                <span className="text-[#abb2bf]">My favorite movie is The Green Mile</span>
-              </div>
-              <div className="border border-[#abb2bf] px-4 py-2 inline-block">
-                <span className="text-[#abb2bf]">I don't have any siblings</span>
+                <span className="text-[#abb2bf]">My favorite movie is Dead Poet Society</span>
               </div>
             </div>
             <div className="space-y-4">
@@ -172,9 +167,6 @@ export default function AboutMe() {
               </div>
               <div className="border border-[#abb2bf] px-4 py-2 inline-block">
                 <span className="text-[#abb2bf]">I was in Egypt, Poland and Turkey</span>
-              </div>
-              <div className="border border-[#abb2bf] px-4 py-2 inline-block">
-                <span className="text-[#abb2bf]">I am still in school</span>
               </div>
             </div>
           </div>

@@ -1,11 +1,10 @@
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
 import { Mail } from 'lucide-react'
 import Link from "next/link"
-import { EnhancedButton } from "@/components/ui/enhanced-button"
-import { LanguageDropdown } from "@/components/ui/language-dropdown"
 import { SocialIcons } from "@/components/ui/social-icons"
 import { DotPattern, GeometricShapes } from "@/components/ui/decorative-elements"
+import { ProjectCard } from "@/components/project-card"
+import { getProjectsByCategory } from "@/lib/projects-data"
 import { getAssetPath } from "@/lib/utils"
 
 export default function Portfolio() {
@@ -37,7 +36,6 @@ export default function Portfolio() {
             <Link href="/contacts" className="hover:text-[#c778dd] transition-colors">
               <span className="text-[#c778dd]">#</span>contacts
             </Link>
-            <LanguageDropdown />
           </div>
         </nav>
       </header>
@@ -108,75 +106,9 @@ export default function Portfolio() {
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* ChertNodes */}
-            <Card className="bg-[#21252b] border-[#abb2bf] overflow-hidden">
-              <div className="h-48 bg-gradient-to-br from-orange-500 to-red-600 relative">
-                <img
-                  src={getAssetPath("/chertnodes-project-interface-dark-theme.jpg")}
-                  alt="ChertNodes project"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <div className="flex flex-wrap gap-2 mb-3">
-                  <span className="text-xs px-2 py-1 border border-[#abb2bf] text-[#abb2bf]">React.js</span>
-                  <span className="text-xs px-2 py-1 border border-[#abb2bf] text-[#abb2bf]">TypeScript</span>
-                  <span className="text-xs px-2 py-1 border border-[#abb2bf] text-[#abb2bf]">Tailwind CSS</span>
-                </div>
-                <h3 className="text-[#ffffff] font-semibold mb-2">ChertNodes</h3>
-                <p className="text-sm text-[#abb2bf] mb-4">Minecraft servers hosting</p>
-                <div className="flex gap-2">
-                  <EnhancedButton variant="live">Live &lt;~&gt;</EnhancedButton>
-                  <EnhancedButton variant="cached">Cached &gt;</EnhancedButton>
-                </div>
-              </div>
-            </Card>
-
-            {/* ProtectX */}
-            <Card className="bg-[#21252b] border-[#abb2bf] overflow-hidden">
-              <div className="h-48 bg-[#1a1a1a] relative flex items-center justify-center">
-                <img
-                  src={getAssetPath("/protectx-security-app-interface-green-shield.jpg")}
-                  alt="ProtectX project"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <div className="flex flex-wrap gap-2 mb-3">
-                  <span className="text-xs px-2 py-1 border border-[#abb2bf] text-[#abb2bf]">React.js</span>
-                  <span className="text-xs px-2 py-1 border border-[#abb2bf] text-[#abb2bf]">FastAPI</span>
-                  <span className="text-xs px-2 py-1 border border-[#abb2bf] text-[#abb2bf]">PostgreSQL</span>
-                </div>
-                <h3 className="text-[#ffffff] font-semibold mb-2">ProtectX</h3>
-                <p className="text-sm text-[#abb2bf] mb-4">Discord anti-crash bot</p>
-                <div className="flex gap-2">
-                  <EnhancedButton variant="live">Live &lt;~&gt;</EnhancedButton>
-                </div>
-              </div>
-            </Card>
-
-            {/* Kahoot Answers Viewer */}
-            <Card className="bg-[#21252b] border-[#abb2bf] overflow-hidden">
-              <div className="h-48 bg-[#6441a5] relative flex items-center justify-center">
-                <img
-                  src={getAssetPath("/kahoot-answers-viewer-purple-interface.jpg")}
-                  alt="Kahoot Answers Viewer project"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <div className="flex flex-wrap gap-2 mb-3">
-                  <span className="text-xs px-2 py-1 border border-[#abb2bf] text-[#abb2bf]">JavaScript</span>
-                  <span className="text-xs px-2 py-1 border border-[#abb2bf] text-[#abb2bf]">FastAPI</span>
-                  <span className="text-xs px-2 py-1 border border-[#abb2bf] text-[#abb2bf]">MongoDB</span>
-                </div>
-                <h3 className="text-[#ffffff] font-semibold mb-2">Kahoot Answers Viewer</h3>
-                <p className="text-sm text-[#abb2bf] mb-4">Get answers to your kahoot quiz</p>
-                <div className="flex gap-2">
-                  <EnhancedButton variant="live">Live &lt;~&gt;</EnhancedButton>
-                </div>
-              </div>
-            </Card>
+            {getProjectsByCategory('complete-apps').slice(0, 3).map((project) => (
+              <ProjectCard key={project.id} project={project} size="large" />
+            ))}
           </div>
         </div>
       </section>

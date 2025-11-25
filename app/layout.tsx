@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: 'Damir',
   description: 'Created with love',
   generator: 'dmr',
+  icons: {
+    icon: '/icon.svg',
+  },
 }
 
 export default function RootLayout({
