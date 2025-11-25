@@ -9,7 +9,9 @@ export const metadata: Metadata = {
   description: 'Created with love',
   generator: 'dmr',
   icons: {
-    icon: '/icon.svg',
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/icon.svg',
   },
 }
 
