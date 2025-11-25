@@ -2,7 +2,7 @@
 
 A modern, responsive portfolio website showcasing my work as a frontend developer. Built with Next.js, TypeScript, and Tailwind CSS, featuring a dark theme with purple accents and smooth animations.
 
-![Portfolio Preview](public/portfolio-preview.png)
+[![Portfolio Preview](public/portfolio-preview.png)](https://damirbek05.github.io/Damir_Portfolio/)
 
 ## 🚀 Features
 
