@@ -22,9 +22,35 @@ if (!fs.existsSync(indexPath)) {
 // 2. Create .nojekyll file to prevent Jekyll from ignoring _next folder
 
 // Read and copy index.html to 404.html
-const indexContent = fs.readFileSync(indexPath, 'utf8');
+let indexContent = fs.readFileSync(indexPath, 'utf8');
+
+// Получаем basePath из переменной окружения
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '/Damir_Portfolio';
+const basePathName = basePath.replace(/^\//, '');
+const basePathDir = path.join(outDir, basePathName);
+const expectedPath = `${basePath}/_next`;
+
+// Проверяем, есть ли неправильные пути (без basePath) и исправляем их
+if (indexContent.includes('"/_next/') && basePath) {
+  console.warn('⚠ Found paths without basePath in index.html, fixing...');
+  // Заменяем все пути /_next/ на /Damir_Portfolio/_next/
+  indexContent = indexContent.replace(/\"\/_next\//g, `"${basePath}/_next/`);
+  console.log('✓ Fixed paths to include basePath');
+}
+
+// Проверяем, есть ли правильные пути (с basePath)
+if (indexContent.includes(`"${expectedPath}/`)) {
+  console.log(`✓ Verified paths include basePath: ${expectedPath}`);
+}
+
 fs.writeFileSync(filePath, indexContent, 'utf8');
 console.log('✓ Generated 404.html for GitHub Pages (copied from index.html)');
+
+// Также исправляем index.html если нужно
+if (indexContent !== fs.readFileSync(indexPath, 'utf8')) {
+  fs.writeFileSync(indexPath, indexContent, 'utf8');
+  console.log('✓ Fixed paths in index.html');
+}
 
 // Create .nojekyll file to prevent GitHub Pages from ignoring _next folder
 // This is CRITICAL - without it, GitHub Pages will ignore the _next folder
@@ -41,9 +67,6 @@ if (fs.existsSync(nojekyllPath)) {
 
 // Check if _next folder exists (could be in root or in basePath folder)
 const nextDir = path.join(outDir, '_next');
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '/Damir_Portfolio';
-const basePathName = basePath.replace(/^\//, '');
-const basePathDir = path.join(outDir, basePathName);
 
 // Check structure and move files if needed
 if (fs.existsSync(nextDir)) {

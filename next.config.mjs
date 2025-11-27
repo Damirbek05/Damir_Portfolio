@@ -6,7 +6,7 @@ const basePath = process.env.GITHUB_REPOSITORY
 const nextConfig = {
   output: 'export',
   basePath: basePath,
-  // assetPrefix должен быть с слэшем в конце для правильных путей к статическим файлам
+  // assetPrefix должен быть с слэшем в конце для правильных путей
   assetPrefix: basePath ? `${basePath}/` : undefined,
   trailingSlash: true,
   env: {
