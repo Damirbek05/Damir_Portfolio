@@ -4,12 +4,23 @@ import { useEffect } from 'react'
 
 export function Favicon() {
   useEffect(() => {
+    // Wait for hydration to complete
+    if (typeof window === 'undefined') return
+    
     const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
     const faviconPath = `${basePath}/icons8-фиолетовое-сердце-48.png`
     
-    // Удаляем старые favicon
+    // Удаляем старые favicon с проверкой на существование
     const existingLinks = document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]')
-    existingLinks.forEach(link => link.remove())
+    existingLinks.forEach(link => {
+      // Проверяем, что элемент все еще в DOM перед удалением
+      if (link.parentNode) {
+        link.parentNode.removeChild(link)
+      }
+    })
+    
+    // Проверяем, что head существует
+    if (!document.head) return
     
     // Создаем новый favicon
     const link = document.createElement('link')
