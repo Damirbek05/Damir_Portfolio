@@ -21,12 +21,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  // Only load Analytics on Vercel (not on GitHub Pages)
+  // If basePath exists, we're on GitHub Pages, so don't load Analytics
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
+  const isGitHubPages = basePath !== ''
+  
   return (
     <html lang="en">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
         <Favicon />
         {children}
-        <Analytics />
+        {!isGitHubPages && <Analytics />}
       </body>
     </html>
   )
