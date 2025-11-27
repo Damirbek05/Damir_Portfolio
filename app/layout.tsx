@@ -27,8 +27,8 @@ export default function RootLayout({
   const isGitHubPages = basePath !== ''
   
   return (
-    <html lang="en">
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
         <Favicon />
         {children}
         {!isGitHubPages && <Analytics />}
