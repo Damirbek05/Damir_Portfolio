@@ -21,36 +21,82 @@ if (!fs.existsSync(indexPath)) {
 // 1. Create a 404.html that loads the Next.js app
 // 2. Create .nojekyll file to prevent Jekyll from ignoring _next folder
 
-// Read and copy index.html to 404.html
-let indexContent = fs.readFileSync(indexPath, 'utf8');
-
 // Получаем basePath из переменной окружения
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '/Damir_Portfolio';
 const basePathName = basePath.replace(/^\//, '');
 const basePathDir = path.join(outDir, basePathName);
 const expectedPath = `${basePath}/_next`;
 
-// Проверяем, есть ли неправильные пути (без basePath) и исправляем их
-if (indexContent.includes('"/_next/') && basePath) {
-  console.warn('⚠ Found paths without basePath in index.html, fixing...');
-  // Заменяем все пути /_next/ на /Damir_Portfolio/_next/
-  indexContent = indexContent.replace(/\"\/_next\//g, `"${basePath}/_next/`);
-  console.log('✓ Fixed paths to include basePath');
+// Функция для исправления путей в HTML
+function fixPathsInHTML(content) {
+  if (!basePath) return content;
+  
+  let fixed = content;
+  
+  // Исправляем пути к _next, но только те, которые НЕ начинаются с basePath
+  // Это важно, чтобы не заменить уже правильные пути
+  
+  // Исправляем пути в кавычках (но не те, что уже с basePath)
+  fixed = fixed.replace(/\"\/_next\//g, `"${basePath}/_next/`);
+  fixed = fixed.replace(/'\/_next\//g, `'${basePath}/_next/`);
+  
+  // Исправляем пути в атрибутах
+  fixed = fixed.replace(/href="\/_next\//g, `href="${basePath}/_next/`);
+  fixed = fixed.replace(/src="\/_next\//g, `src="${basePath}/_next/`);
+  
+  // Исправляем пути в CSS url()
+  fixed = fixed.replace(/url\("\/_next\//g, `url("${basePath}/_next/`);
+  fixed = fixed.replace(/url\('\/_next\//g, `url('${basePath}/_next/`);
+  fixed = fixed.replace(/url\(\/_next\//g, `url(${basePath}/_next/`);
+  
+  // Исправляем пути в JSON строках (для RSC payload)
+  // Но только если они не начинаются с basePath
+  const basePathEscaped = basePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  fixed = fixed.replace(new RegExp(`"\\/_next\\/`, 'g'), `"${basePath}/_next/`);
+  fixed = fixed.replace(new RegExp(`'\\/_next\\/`, 'g'), `'${basePath}/_next/`);
+  
+  return fixed;
 }
 
-// Проверяем, есть ли правильные пути (с basePath)
-if (indexContent.includes(`"${expectedPath}/`)) {
-  console.log(`✓ Verified paths include basePath: ${expectedPath}`);
-}
+// Читаем и исправляем index.html
+let indexContent = fs.readFileSync(indexPath, 'utf8');
+const originalIndexContent = indexContent;
+indexContent = fixPathsInHTML(indexContent);
 
-fs.writeFileSync(filePath, indexContent, 'utf8');
-console.log('✓ Generated 404.html for GitHub Pages (copied from index.html)');
-
-// Также исправляем index.html если нужно
-if (indexContent !== fs.readFileSync(indexPath, 'utf8')) {
+if (indexContent !== originalIndexContent) {
   fs.writeFileSync(indexPath, indexContent, 'utf8');
   console.log('✓ Fixed paths in index.html');
 }
+
+// Копируем исправленный index.html в 404.html
+fs.writeFileSync(filePath, indexContent, 'utf8');
+console.log('✓ Generated 404.html for GitHub Pages (copied from index.html)');
+
+// Исправляем ВСЕ HTML файлы в папке out
+function fixAllHTMLFiles(dir) {
+  const files = fs.readdirSync(dir, { withFileTypes: true });
+  
+  files.forEach(file => {
+    const fullPath = path.join(dir, file.name);
+    
+    if (file.isDirectory()) {
+      // Рекурсивно обрабатываем подпапки
+      fixAllHTMLFiles(fullPath);
+    } else if (file.name.endsWith('.html')) {
+      const content = fs.readFileSync(fullPath, 'utf8');
+      const fixed = fixPathsInHTML(content);
+      
+      if (content !== fixed) {
+        fs.writeFileSync(fullPath, fixed, 'utf8');
+        console.log(`✓ Fixed paths in ${path.relative(outDir, fullPath)}`);
+      }
+    }
+  });
+}
+
+console.log('🔍 Fixing paths in all HTML files...');
+fixAllHTMLFiles(outDir);
+console.log('✓ All HTML files processed');
 
 // Create .nojekyll file to prevent GitHub Pages from ignoring _next folder
 // This is CRITICAL - without it, GitHub Pages will ignore the _next folder
