@@ -27,6 +27,23 @@ fs.writeFileSync(filePath, indexContent, 'utf8');
 console.log('✓ Generated 404.html for GitHub Pages (copied from index.html)');
 
 // Create .nojekyll file to prevent GitHub Pages from ignoring _next folder
+// This is CRITICAL - without it, GitHub Pages will ignore the _next folder
 fs.writeFileSync(nojekyllPath, '', 'utf8');
 console.log('✓ Generated .nojekyll file to prevent Jekyll from ignoring _next folder');
+
+// Verify .nojekyll was created
+if (fs.existsSync(nojekyllPath)) {
+  console.log('✓ Verified .nojekyll file exists');
+} else {
+  console.error('❌ ERROR: .nojekyll file was not created!');
+  process.exit(1);
+}
+
+// Check if _next folder exists
+const nextDir = path.join(outDir, '_next');
+if (fs.existsSync(nextDir)) {
+  console.log('✓ Verified _next folder exists');
+} else {
+  console.warn('⚠ WARNING: _next folder not found in out directory');
+}
 
