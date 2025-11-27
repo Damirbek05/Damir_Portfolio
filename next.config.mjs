@@ -6,7 +6,6 @@ const basePath = process.env.GITHUB_REPOSITORY
 const nextConfig = {
   output: 'export',
   basePath: basePath,
-  assetPrefix: basePath || undefined,
   trailingSlash: true,
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,
