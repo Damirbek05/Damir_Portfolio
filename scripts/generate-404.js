@@ -39,11 +39,57 @@ if (fs.existsSync(nojekyllPath)) {
   process.exit(1);
 }
 
-// Check if _next folder exists
+// Check if _next folder exists (could be in root or in basePath folder)
 const nextDir = path.join(outDir, '_next');
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '/Damir_Portfolio';
+const basePathName = basePath.replace(/^\//, '');
+const basePathDir = path.join(outDir, basePathName);
+
+// Check structure and move files if needed
 if (fs.existsSync(nextDir)) {
-  console.log('✓ Verified _next folder exists');
+  console.log('✓ Verified _next folder exists in root');
+} else if (fs.existsSync(path.join(basePathDir, '_next'))) {
+  console.log(`⚠ Found _next folder in ${basePathName}/, but GitHub Pages needs it in root`);
+  console.log('  Moving _next folder to root...');
+  
+  // Move _next folder from basePath to root
+  const sourceNextDir = path.join(basePathDir, '_next');
+  const destNextDir = path.join(outDir, '_next');
+  
+  // Copy recursively
+  function copyRecursiveSync(src, dest) {
+    const exists = fs.existsSync(src);
+    const stats = exists && fs.statSync(src);
+    const isDirectory = exists && stats.isDirectory();
+    if (isDirectory) {
+      if (!fs.existsSync(dest)) {
+        fs.mkdirSync(dest, { recursive: true });
+      }
+      fs.readdirSync(src).forEach(childItemName => {
+        copyRecursiveSync(
+          path.join(src, childItemName),
+          path.join(dest, childItemName)
+        );
+      });
+    } else {
+      fs.copyFileSync(src, dest);
+    }
+  }
+  
+  copyRecursiveSync(sourceNextDir, destNextDir);
+  console.log('✓ Moved _next folder to root');
 } else {
-  console.warn('⚠ WARNING: _next folder not found in out directory');
+  console.warn('⚠ WARNING: _next folder not found');
+  console.warn(`   Checked: ${nextDir}`);
+  console.warn(`   Checked: ${path.join(basePathDir, '_next')}`);
+  
+  // List directory structure for debugging
+  if (fs.existsSync(outDir)) {
+    console.log('\n📁 Contents of out directory:');
+    const contents = fs.readdirSync(outDir, { withFileTypes: true });
+    contents.forEach(item => {
+      console.log(`   ${item.isDirectory() ? '📁' : '📄'} ${item.name}`);
+    });
+  }
 }
 
