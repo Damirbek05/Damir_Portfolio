@@ -124,8 +124,10 @@ export default function Portfolio() {
               <h3 className="text-[#ffffff] font-semibold mb-4 border border-[#abb2bf] px-3 py-2">Frontend</h3>
               <div className="border border-[#abb2bf] border-t-0 p-4 space-y-2">
                 <div className="text-[#abb2bf]">React.js TypeScript</div>
+                <div className="text-[#abb2bf]">HTML CSS</div>
                 <div className="text-[#abb2bf]">JavaScript (ES6+)</div>
                 <div className="text-[#abb2bf]">Tailwind CSS</div>
+                <div className="text-[#abb2bf]">NextJS</div>
               </div>
             </div>
             <div>
@@ -134,6 +136,7 @@ export default function Portfolio() {
                 <div className="text-[#abb2bf]">NestJs</div>
                 <div className="text-[#abb2bf]">RESTful APIs</div>
                 <div className="text-[#abb2bf]">Swagger UI</div>
+                <div className="text-[#abb2bf]">FastAPI</div>
               </div>
             </div>
             <div>
